@@ -1,3 +1,10 @@
+"""
+So we have to use a recursion, and not a for loop.  
+So basically, recursion occurs until it hits the base case, then it stops
+
+Really this problem is one of changing the pointers opposite of each other, no?
+"""
+
 class Node:
     def __init__(self, value=None, next_node=None):
         # the value at this linked list node
@@ -47,4 +54,50 @@ class LinkedList:
 
     def reverse_list(self, node, prev):
         # You must use recursion for this solution
-        pass
+        prev = None
+        current = self.head
+        while current is not None:
+            next = current.next  # Node object has no attribute next
+            current.next = prev
+            prev = current
+            current = next
+        self.head = prev
+
+
+"""
+From geeks for geeks: https://www.geeksforgeeks.org/reverse-a-linked-list/
+
+    # Function to reverse the linked list 
+    def reverse(self): 
+        prev = None
+        current = self.head 
+        while(current is not None): 
+            next = current.next
+            current.next = prev 
+            prev = current 
+            current = next
+        self.head = prev 
+
+Basically it's about changing links between nodes.
+
+We iterate through the linked list.  
+In the loop, we:
+- before changing next of current,
+- store next node
+next = curr-> next
+- now change next of current
+- this is where reversing happens
+curr -> next = prev
+
+Move prev and current one step forward
+prev = curr
+cur = next
+============
+BUT THIS IS ITERATIVE.  NEED TO DO IT RECURSIVELY
+For recursion, we need to do this:
+   1) Divide the list in two parts - first node and 
+      rest of the linked list.
+   2) Call reverse for the rest of the linked list.
+   3) Link rest to first.
+   4) Fix head pointer
+"""
