@@ -28,7 +28,7 @@ class RingBuffer:
     """Need to insert new log, and remove old log."""
     def append(self, item):
     # Think: "set" from our LRU cache project
-        If len (self.storage) < self.capacity:
+        if len(self.storage) < self.capacity:
             # Add newest item in tail
             self.storage.add_to_tail(item)
             # Set pointer to tail (since buffer not full)
@@ -40,16 +40,12 @@ class RingBuffer:
                 self.current = self.storage.head
 
             else:  # For first time overwriting, need to find next oldest
+                # We shift to this next value because it is _now_ the oldest entry
                 self.current = self.current.next
             
             # Overwrite the value
             self.current.value = item
 
-"""  Moving to next problem
-File "C:\cs_unit1\Sprint-Challenge--Data-Structures-Python\ring_buffer\ring_buffer.py", line 31
-    If self.storage.length < self.capacity:
-       ^
-"""
 
     """After insertion and deletion from append,
     We return the list in their given order."""
@@ -57,12 +53,17 @@ File "C:\cs_unit1\Sprint-Challenge--Data-Structures-Python\ring_buffer\ring_buff
         # Note:  This is the only [] allowed
         list_buffer_contents = []
 
-        # if len (self.storage) == self.capacity:
-        #     # Remove oldest entry to make room
-        #     del self.list_buffer_contents[self.storage.head.value]
+        # Create a pointer, which starts at head of our LL
+        pointer = self.storage.head
 
-        #     # APPEND within that list_buffer_contents to return
-        # return list_buffer_contents
+        # As long as pointer is not None,
+        while pointer is not None:
+            # append to [] the node's value
+            list_buffer_contents.append(pointer.value)
+            # Move to next node -- continue until you reach None
+            pointer = pointer.next
+
+        return list_buffer_contents
 
 
 

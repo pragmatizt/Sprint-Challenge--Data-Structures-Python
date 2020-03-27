@@ -54,14 +54,40 @@ class LinkedList:
 
     def reverse_list(self, node, prev):
         # You must use recursion for this solution
+        # the previous value for start of list is None
         prev = None
+    
+        # We are starting at the head node
         current = self.head
-        while current is not None:
-            next = current.next  # Node object has no attribute next
-            current.next = prev
+
+        while(current is not None):
+            # current node points to the next node
+            next = current.next_node
+            # we then make what current node points to towards previous node
+            current.next_node = prev
+            
+            # we make our previous node catch up to what was just (and about to be formerly) current node
             prev = current
+            # our current node matches with our next node - it is what is next on the list
             current = next
+
+            # and then it loops again -- the next node is identified, and it goes through the same process.
         self.head = prev
+
+"""
+so basically:
+
+- next moves forward first -- 
+- the pointer points backwards
+- "previous" moves up and catches up with current
+- current shifts right to catch up with "next"
+- next moves to next node
+-the pointer points backwards
+etc.
+"""
+
+
+
 
 
 """

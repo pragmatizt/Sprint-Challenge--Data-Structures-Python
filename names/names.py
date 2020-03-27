@@ -19,11 +19,8 @@ names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
 """
-This is a binary search tree solution.  Because from my understanding of the concept: 
-it would run a pass of the names from both files, and since it does not allow duplicatse
-
-In BST, "contains" returns TRUE if the tree contains the value.  So it will run 
 0:29:00 mark from Thursday's lecture: https://youtu.be/_2gJLjhquXE
+In BST, "contains" returns TRUE if the tree contains the value.  So it will run 
 """
 
 
